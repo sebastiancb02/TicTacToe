@@ -2,53 +2,102 @@ namespace TicTacToe;
 
 public static class Logic
 {
-    char[,] ticTacToeGrid = new char [3, 3];
-
-    //Make the evil AI machine 👇
-    Random rnd = new Random();  
-    
-    //Now it’s the machine’s turn to place its symbol in the grid 👇
-    ticTacToe [3,3] += rnd.Next(SYMBOL_USED_BY_MACHINE);
-    
-    //Check horizontal lines👇
-    for (int row = 0; row < SIZE_OF_THE_GRID; row++)
-    {
-        for (int column = 0; column < SIZE_OF_THE_GRID; column++)
+    public static void InitializeGrid(char[,] grid)
+    {    
+        for (int row = 0; row < Constants.SIZE_OF_THE_GRID; row++)
         {
-            if (ticTacToeGrid[row, 0] != ticTacToeGrid[row, column])
+            for (int column = 0; column < Constants.SIZE_OF_THE_GRID; column++)
             {
-                match;
+                grid[row, column] = Constants.DASH_SYMBOL; 
             }
         }
     }
 
-    //Check vertical lines👇
-    for (int row = 0; row < SIZE_OF_THE_GRID; row++)
+    public static char[,] PopulateGridWithUserSymbol(char[,] grid, int row, int column)
     {
-        for (int column = 0; column < SIZE_OF_THE_GRID; column++)
+        grid[row, column] = Constants.SYMBOL_USED_BY_USER;
+        return grid;
+    }
+    
+    public static bool CheckSlotAvailability(char[,] grid, int row, int column)
+    {
+        bool available = true;
+        
+        if (grid[row, column] == Constants.SYMBOL_USED_BY_MACHINE)
         {
-            if (ticTacToeGrid[0, column] == ticTacToeGrid[row, column])
+            available = false;
+        }
+        
+        if (grid[row, column] == Constants.SYMBOL_USED_BY_USER)
+        {
+            available = false;
+        }
+
+        return available;
+    }
+    
+    public static char[,] PopulateGridWithMachineSymbol(char[,] grid)
+    {
+        Random rnd = new Random();
+        int row = rnd.Next(0,3);
+        int column = rnd.Next(0,3);
+        
+        grid [row,column] = Constants.SYMBOL_USED_BY_MACHINE;
+        return grid;
+    }
+
+    public static bool CheckTheHorizontalLinesInTheGrid(char[,] grid)
+    {
+        bool match = true;
+        
+        for (int row = 0; row < Constants.SIZE_OF_THE_GRID; row++)
+        {
+            for (int column = 0; column < Constants.SIZE_OF_THE_GRID; column++)
             {
-                match;
+                if (grid[row, 0] != grid[row, column])
+                {
+                    return match;
+                }
             }
         }
     }
 
-    //Check diagonal lines👇
-    for (int row = 0; row < SIZE_OF_THE_GRID; row++)
+    public static bool CheckTheVerticalLinesInTheGrid(char[,] grid)
     {
-        if (ticTacToeGrid[0, 0] == ticTacToeGrid[row, row])
+        bool match = true;
+        
+        for (int row = 0; row < Constants.SIZE_OF_THE_GRID; row++)
         {
-            match;
+            for (int column = 0; column < Constants.SIZE_OF_THE_GRID; column++)
+            {
+                if (grid[0, column] == grid[row, column])
+                {
+                    return match;
+                }
+            }
         }
     }
-
-    for (int row = 0; row < SIZE_OF_THE_GRID; row++)
+    
+    public static bool CheckTheDiagonalLinesInTheGrid(char[,] grid)
     {
-        if (ticTacToeGrid[0, SIZE_OF_THE_GRID - 1] == ticTacToeGrid[row, SIZE_OF_THE_GRID - row - 1])
+        bool match = true;
+        
+        for (int row = 0; row < Constants.SIZE_OF_THE_GRID; row++)
         {
-            match;
+            if (grid[0, 0] == grid[row, row])
+            {
+                return match;
+            }
         }
+
+        for (int row = 0; row < Constants.SIZE_OF_THE_GRID; row++)
+        {
+            if (grid[0, Constants.SIZE_OF_THE_GRID - 1] == grid[row, Constants.SIZE_OF_THE_GRID - row - 1])
+            {
+               return match;
+            }
+        }
+    
     }
     
 }
