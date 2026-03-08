@@ -25,7 +25,8 @@ class Program
             
             if (!available)
             {
-                UI.ShowMessageIfASlotIsTaken();    
+                UI.ShowMessageIfASlotIsTaken();
+                continue;
             } 
             
             grid = Logic.PopulateGridWithUserSymbol(grid, row, column); //Why the part with "grid ="?
@@ -34,9 +35,22 @@ class Program
             
             Logic.CheckSlotAvailability(grid, row, column);
             
-            bool match = Logic.CheckTheHorizontalLinesInTheGrid(grid);
-            bool match = Logic.CheckTheVerticalLinesInTheGrid(grid);
-            bool match = Logic.CheckTheDiagonalLinesInTheGrid(grid);
+            match = Logic.CheckTheHorizontalLinesInTheGrid(grid);
+            match = Logic.CheckTheVerticalLinesInTheGrid(grid);
+            match = Logic.CheckTheFirstDiagonalLineInTheGrid(grid);
+            match = Logic.CheckTheSecondDiagonalLineInTheGrid(grid);
+
+            bool theUserWon = Logic.CheckWhoIsTheWinnerOfTheGame(grid);
+            
+            if (theUserWon)
+            {
+                UI.ShowWinnerMessage();
+                break;
+            }
+            else
+            {
+                UI.ShowLoserMessage();
+            }
         }
         
 

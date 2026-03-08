@@ -12,12 +12,6 @@ public static class Logic
             }
         }
     }
-
-    public static char[,] PopulateGridWithUserSymbol(char[,] grid, int row, int column)
-    {
-        grid[row, column] = Constants.SYMBOL_USED_BY_USER;
-        return grid;
-    }
     
     public static bool CheckSlotAvailability(char[,] grid, int row, int column)
     {
@@ -34,6 +28,12 @@ public static class Logic
         }
 
         return available;
+    }
+    
+    public static char[,] PopulateGridWithUserSymbol(char[,] grid, int row, int column)
+    {
+        grid[row, column] = Constants.SYMBOL_USED_BY_USER;
+        return grid;
     }
     
     public static char[,] PopulateGridWithMachineSymbol(char[,] grid)
@@ -56,10 +56,11 @@ public static class Logic
             {
                 if (grid[row, 0] != grid[row, column])
                 {
-                    return match;
+                    return match = false;
                 }
             }
         }
+        return match;
     }
 
     public static bool CheckTheVerticalLinesInTheGrid(char[,] grid)
@@ -70,34 +71,56 @@ public static class Logic
         {
             for (int column = 0; column < Constants.SIZE_OF_THE_GRID; column++)
             {
-                if (grid[0, column] == grid[row, column])
+                if (grid[0, column] != grid[row, column])
                 {
-                    return match;
+                    return match = false;
                 }
             }
         }
+        return match;
     }
     
-    public static bool CheckTheDiagonalLinesInTheGrid(char[,] grid)
+    public static bool CheckTheFirstDiagonalLineInTheGrid(char[,] grid)
     {
         bool match = true;
         
         for (int row = 0; row < Constants.SIZE_OF_THE_GRID; row++)
         {
-            if (grid[0, 0] == grid[row, row])
+            if (grid[0, 0] != grid[row, row])
             {
-                return match;
+                return match = false;
             }
         }
-
+        return match;
+    }
+    
+    public static bool CheckTheSecondDiagonalLineInTheGrid(char[,] grid)
+    {
+        bool match = true;
+        
         for (int row = 0; row < Constants.SIZE_OF_THE_GRID; row++)
         {
-            if (grid[0, Constants.SIZE_OF_THE_GRID - 1] == grid[row, Constants.SIZE_OF_THE_GRID - row - 1])
+            if (grid[0, Constants.SIZE_OF_THE_GRID - 1] != grid[row, Constants.SIZE_OF_THE_GRID - row - 1])
             {
-               return match;
+                return match = false;
             }
         }
+        return match;
+    }
     
+    public static bool CheckWhoIsTheWinnerOfTheGame(char[,] grid)
+    {
+        bool TheUserWon = true;
+
+        if (== Constants.SYMBOL_USED_BY_USER)
+        {
+            return TheUserWon;
+        }
+
+        if (== Constants.SYMBOL_USED_BY_MACHINE)
+        {
+            return TheUserWon = false;
+        }
     }
     
 }

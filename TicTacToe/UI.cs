@@ -50,7 +50,7 @@ public static class UI
 
             if (userInput < 0 || userInput > 2) 
             {
-                Console.WriteLine("Please make sure to choose a number between 0-2"); 
+                Console.WriteLine("Please, make sure to choose a number between 0-2"); 
                 continue;
             }
         }
@@ -59,5 +59,15 @@ public static class UI
     public static void ShowMessageIfASlotIsTaken()
     {
         Console.WriteLine("Slot already occupied, try another one");
+    }
+    
+    public static void ShowWinnerMessage()  
+    {
+        Console.WriteLine("You've won the game :D");
+    }
+    
+    public static void ShowLoserMessage()  
+    {
+        Console.WriteLine("You've won the game :D");
     }
 }
