@@ -68,6 +68,6 @@ public static class UI
     
     public static void ShowLoserMessage()  
     {
-        Console.WriteLine("You've won the game :D");
+        Console.WriteLine("You've lost the game :(");
     }
 }

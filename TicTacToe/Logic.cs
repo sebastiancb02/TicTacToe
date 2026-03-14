@@ -108,9 +108,16 @@ public static class Logic
         return match;
     }
     
-    public static bool CheckWhoIsTheWinnerOfTheGame(char[,] grid)
+    public static bool CheckIfWin(char[,] grid)
+    {
+        return Logic.CheckTheHorizontalLinesInTheGrid(grid) || Logic.CheckTheVerticalLinesInTheGrid(grid) || Logic.CheckTheFirstDiagonalLineInTheGrid(grid) || Logic.CheckTheSecondDiagonalLineInTheGrid(grid); 
+    }
+    
+    public static bool CheckWhoTheWinnerOfTheGameIs(char[,] grid)
     {
         bool TheUserWon = true;
+        
+        Logic.CheckIfWin(grid);
 
         if (== Constants.SYMBOL_USED_BY_USER)
         {

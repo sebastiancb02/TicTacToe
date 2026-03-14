@@ -34,19 +34,17 @@ class Program
             Logic.PopulateGridWithMachineSymbol(grid);
             
             Logic.CheckSlotAvailability(grid, row, column);
-            
-            match = Logic.CheckTheHorizontalLinesInTheGrid(grid);
-            match = Logic.CheckTheVerticalLinesInTheGrid(grid);
-            match = Logic.CheckTheFirstDiagonalLineInTheGrid(grid);
-            match = Logic.CheckTheSecondDiagonalLineInTheGrid(grid);
 
-            bool theUserWon = Logic.CheckWhoIsTheWinnerOfTheGame(grid);
+            match = Logic.CheckIfWin(grid);
+
+            bool theUserWon = Logic.CheckWhoTheWinnerOfTheGameIs(grid);
             
             if (theUserWon)
             {
                 UI.ShowWinnerMessage();
                 break;
             }
+            
             else
             {
                 UI.ShowLoserMessage();
