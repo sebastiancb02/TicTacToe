@@ -17,16 +17,11 @@ public static class Logic
     {
         bool available = true;
         
-        if (grid[row, column] == Constants.SYMBOL_USED_BY_MACHINE)
+        if (grid[row, column] == Constants.SYMBOL_USED_BY_MACHINE || grid[row, column] == Constants.SYMBOL_USED_BY_USER)
         {
             available = false;
         }
         
-        if (grid[row, column] == Constants.SYMBOL_USED_BY_USER)
-        {
-            available = false;
-        }
-
         return available;
     }
     
@@ -113,21 +108,54 @@ public static class Logic
         return Logic.CheckTheHorizontalLinesInTheGrid(grid) || Logic.CheckTheVerticalLinesInTheGrid(grid) || Logic.CheckTheFirstDiagonalLineInTheGrid(grid) || Logic.CheckTheSecondDiagonalLineInTheGrid(grid); 
     }
     
-    public static bool CheckWhoTheWinnerOfTheGameIs(char[,] grid)
+    public static char CheckWhoTheWinnerOfTheGameIs(char[,] grid, int row, int column)
     {
-        bool TheUserWon = true;
+        if (CheckIfWin(grid))
+        {
+            //Horizontal lines 👇
+            if (grid[row, 0] == grid[row, column])
+            {
+                return grid[row, 0];
+            }
         
-        Logic.CheckIfWin(grid);
-
-        if (== Constants.SYMBOL_USED_BY_USER)
-        {
-            return TheUserWon;
+            //Vertical Lines 👇
+            if (grid[0, column] == grid[row, column])
+            {
+                return grid[0, column];
+            }
+        
+            //First diagonal line 👇
+            if (grid[0, 0] != grid[row, row])
+            {
+                return grid[0, 0];
+            }
+        
+            //Second diagonal line 👇
+            if (grid[0, Constants.SIZE_OF_THE_GRID - 1] != grid[row, Constants.SIZE_OF_THE_GRID - row - 1])
+            {
+                return grid[0, Constants.SIZE_OF_THE_GRID - 1];
+            }
+            
         }
-
-        if (== Constants.SYMBOL_USED_BY_MACHINE)
-        {
-            return TheUserWon = false;
-        }
+        
+        return 'y';
     }
     
+    public static bool CheckIfDraw (char[,] grid)
+    {   
+        bool draw = true;
+        
+        for (int row = 0; row < Constants.SIZE_OF_THE_GRID; row++)
+        {
+            for (int column = 0; column < Constants.SIZE_OF_THE_GRID; column++)
+            {
+                if (grid[row, column] != Constants.SYMBOL_USED_BY_USER || grid[row, column] != Constants.SYMBOL_USED_BY_MACHINE)
+                {
+                    return draw  = false;
+                }
+            }
+        }
+        
+        return draw;
+    }    
 }

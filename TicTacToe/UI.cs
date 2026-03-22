@@ -20,24 +20,23 @@ public static class UI
         }
     }
     
-    public static int GetRowNumberFromUser()
+    public static char GetRowNumberFromUser()
     {
         Console.WriteLine("Choose the row (0-2):");
-        return Convert.ToInt32(Console.ReadKey().KeyChar);
+        return Console.ReadKey().KeyChar;
     }
    
-    public static int GetColumnNumberFromUser()
+    public static char GetColumnNumberFromUser()
     {
-        Console.WriteLine("Choose the row (0-2):");
-        return Convert.ToInt32(Console.ReadKey().KeyChar);    
+        Console.WriteLine("Choose the column (0-2):");
+        return Console.ReadKey().KeyChar;    
     }
     
-    public static int ValidateUserInput() //Maybe there's a better way to convert char to int?
+    public static int ValidateUserInput(char input) 
     {
         while (true)
         {
-            char userInputAsChar = Console.ReadKey(true).KeyChar;
-            string userInputAsString = userInputAsChar.ToString();
+            string userInputAsString = input.ToString();
             int userInput;
 
             bool valid = int.TryParse(userInputAsString, out userInput);
@@ -69,5 +68,10 @@ public static class UI
     public static void ShowLoserMessage()  
     {
         Console.WriteLine("You've lost the game :(");
+    }
+    
+    public static void ShowDrawMessage()  
+    {
+        Console.WriteLine("Looks like there has been a draw");
     }
 }
