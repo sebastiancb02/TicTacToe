@@ -153,9 +153,12 @@ public static class Logic
             {
                 if (!CheckIfWin(grid))
                 {
-                    if (grid[row, column] != Constants.SYMBOL_USED_BY_USER || grid[row, column] != Constants.SYMBOL_USED_BY_MACHINE)
-                    {
-                        return false;
+                    if (grid[row, column] != Constants.DASH_SYMBOL)
+                    {    
+                        if (grid[row, column] != Constants.SYMBOL_USED_BY_USER || grid[row, column] != Constants.SYMBOL_USED_BY_MACHINE)
+                        {
+                            return false;
+                        }
                     }    
                 }
             }
