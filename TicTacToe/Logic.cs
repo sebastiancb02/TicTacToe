@@ -51,7 +51,7 @@ public static class Logic
             {
                 if (grid[row, 0] != grid[row, column])
                 {
-                    return match = false;
+                    return false;
                 }
             }
         }
@@ -68,7 +68,7 @@ public static class Logic
             {
                 if (grid[0, column] != grid[row, column])
                 {
-                    return match = false;
+                    return false;
                 }
             }
         }
@@ -83,7 +83,7 @@ public static class Logic
         {
             if (grid[0, 0] != grid[row, row])
             {
-                return match = false;
+                return false;
             }
         }
         return match;
@@ -97,7 +97,7 @@ public static class Logic
         {
             if (grid[0, Constants.SIZE_OF_THE_GRID - 1] != grid[row, Constants.SIZE_OF_THE_GRID - row - 1])
             {
-                return match = false;
+                return false;
             }
         }
         return match;
@@ -144,14 +144,19 @@ public static class Logic
     public static bool CheckIfDraw (char[,] grid)
     {   
         bool draw = true;
+
         
+            
         for (int row = 0; row < Constants.SIZE_OF_THE_GRID; row++)
         {
             for (int column = 0; column < Constants.SIZE_OF_THE_GRID; column++)
             {
-                if (grid[row, column] != Constants.SYMBOL_USED_BY_USER || grid[row, column] != Constants.SYMBOL_USED_BY_MACHINE)
+                if (!CheckIfWin(grid))
                 {
-                    return draw  = false;
+                    if (grid[row, column] != Constants.SYMBOL_USED_BY_USER || grid[row, column] != Constants.SYMBOL_USED_BY_MACHINE)
+                    {
+                        return false;
+                    }    
                 }
             }
         }
