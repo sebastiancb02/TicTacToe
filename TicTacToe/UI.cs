@@ -5,16 +5,18 @@ public static class UI
     public static void DisplayGameIntro()
     {
         Console.WriteLine("Let's play TicTacToe!");
-        Console.WriteLine("Please, place your symbol wherever you want to start playing :)");
+        Console.WriteLine("\nPlease, place your symbol wherever you want to start playing :)");
     }
     
     public static void PrintGrid(char[,] grid)
-    {    
+    {   
+        Console.WriteLine();
+        
         for (int row = 0; row < Constants.SIZE_OF_THE_GRID; row++)
         {
             for (int column = 0; column < Constants.SIZE_OF_THE_GRID; column++)
             {
-                Console.WriteLine(grid[row, column]); 
+                Console.Write(grid[row, column]); 
             }
             Console.WriteLine();
         }
@@ -22,14 +24,14 @@ public static class UI
     
     public static char GetRowNumberFromUser()
     {
-        Console.WriteLine("Choose the row (0-2):");
-        return Console.ReadKey().KeyChar;
+        Console.WriteLine("\nChoose the row (0-2):");
+        return Console.ReadKey(true).KeyChar;
     }
    
     public static char GetColumnNumberFromUser()
     {
-        Console.WriteLine("Choose the column (0-2):");
-        return Console.ReadKey().KeyChar;    
+        Console.WriteLine("\nChoose the column (0-2):");
+        return Console.ReadKey(true).KeyChar;    
     }
     
     public static int ValidateUserInput(char input) 
@@ -43,35 +45,37 @@ public static class UI
             
             if (!valid)
             {
-                Console.WriteLine("Invalid Input"); 
+                Console.WriteLine("\nInvalid Input"); 
                 continue;
             }
 
             if (userInput < 0 || userInput > 2) 
             {
-                Console.WriteLine("Please, make sure to choose a number between 0-2"); 
+                Console.WriteLine("\nPlease, make sure to choose a number between 0-2"); 
                 continue;
             }
+            
+            return userInput;
         }
     }
     
     public static void ShowMessageIfASlotIsTaken()
     {
-        Console.WriteLine("Slot already occupied, try another one");
+        Console.WriteLine("\nSlot already occupied, try another one");
     }
     
     public static void ShowWinnerMessage()  
     {
-        Console.WriteLine("You've won the game :D");
+        Console.WriteLine("\nYou've won the game :D");
     }
     
     public static void ShowLoserMessage()  
     {
-        Console.WriteLine("You've lost the game :(");
+        Console.WriteLine("\nYou've lost the game :(");
     }
     
     public static void ShowDrawMessage()  
     {
-        Console.WriteLine("Looks like there has been a draw");
+        Console.WriteLine("\nLooks like there has been a draw :O");
     }
 }

@@ -12,25 +12,26 @@ class Program
 
         UI.PrintGrid(grid);
 
-        bool match = true;
-        while (!match)
+        bool match = false;
+        while (true)
         {
             int row = UI.ValidateUserInput(UI.GetRowNumberFromUser()); 
             int column = UI.ValidateUserInput(UI.GetColumnNumberFromUser());
 
             bool available = Logic.CheckSlotAvailability(grid, row, column);
+            
             if (!available)
             {
                 UI.ShowMessageIfASlotIsTaken();
                 continue;
             } 
             
-            grid = Logic.PopulateGridWithUserSymbol(grid, row, column);
+            Logic.PopulateGridWithUserSymbol(grid, row, column);
             
             Logic.PopulateGridWithMachineSymbol(grid);
             
             Logic.CheckSlotAvailability(grid, row, column);
-
+            
             match = Logic.CheckIfWin(grid);
 
             if (match)
@@ -51,7 +52,6 @@ class Program
                     break;
                 }    
             }
-            //TODO add else case to check for draw scenario
 
             else
             {
@@ -60,13 +60,11 @@ class Program
                 if (draw)
                 {
                     UI.ShowDrawMessage();
+                    break;
                 }
             }
             
             UI.PrintGrid(grid);
         }
-        
-
     }
-    
 }

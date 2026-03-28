@@ -135,7 +135,6 @@ public static class Logic
             {
                 return grid[0, Constants.SIZE_OF_THE_GRID - 1];
             }
-            
         }
         
         return 'y';
@@ -145,25 +144,22 @@ public static class Logic
     {   
         bool draw = true;
 
+        if (CheckIfWin(grid))
+        {
+            return false;
+        }
         
-            
         for (int row = 0; row < Constants.SIZE_OF_THE_GRID; row++)
         {
             for (int column = 0; column < Constants.SIZE_OF_THE_GRID; column++)
             {
-                if (!CheckIfWin(grid))
-                {
-                    if (grid[row, column] != Constants.DASH_SYMBOL)
-                    {    
-                        if (grid[row, column] != Constants.SYMBOL_USED_BY_USER || grid[row, column] != Constants.SYMBOL_USED_BY_MACHINE)
-                        {
-                            return false;
-                        }
-                    }    
-                }
+                if (grid[row, column] == Constants.DASH_SYMBOL)
+                {    
+                    return false;
+                }    
             }
         }
         
-        return draw;
+        return true;
     }    
 }
