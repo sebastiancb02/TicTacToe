@@ -51,7 +51,10 @@ public static class Logic
             {
                 if (grid[row, 0] != grid[row, column])
                 {
-                    return false;
+                    if (grid[row, column] == Constants.DASH_SYMBOL)
+                    {
+                        return false;
+                    }
                 }
             }
         }
@@ -68,7 +71,10 @@ public static class Logic
             {
                 if (grid[0, column] != grid[row, column])
                 {
-                    return false;
+                    if (grid[row, column] == Constants.DASH_SYMBOL)
+                    {
+                        return false;
+                    }
                 }
             }
         }
@@ -83,7 +89,10 @@ public static class Logic
         {
             if (grid[0, 0] != grid[row, row])
             {
-                return false;
+                if (grid[row, row] == Constants.DASH_SYMBOL)
+                {
+                    return false;
+                }
             }
         }
         return match;
@@ -97,7 +106,10 @@ public static class Logic
         {
             if (grid[0, Constants.SIZE_OF_THE_GRID - 1] != grid[row, Constants.SIZE_OF_THE_GRID - row - 1])
             {
-                return false;
+                if (grid[row, row] == Constants.DASH_SYMBOL)
+                {
+                    return false;
+                }
             }
         }
         return match;
