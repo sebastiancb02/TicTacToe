@@ -1,8 +1,10 @@
+using System.Reflection.Metadata.Ecma335;
+
 namespace TicTacToe;
 
 public static class Logic
 {
-    public static void InitializeGrid(char[,] grid)
+    public static char[,] InitializeGrid(char[,] grid)
     {    
         for (int row = 0; row < Constants.SIZE_OF_THE_GRID; row++)
         {
@@ -11,6 +13,8 @@ public static class Logic
                 grid[row, column] = Constants.DASH_SYMBOL; 
             }
         }
+        
+        return grid;
     }
     
     public static bool CheckSlotAvailability(char[,] grid, int row, int column)
@@ -47,17 +51,20 @@ public static class Logic
         
         for (int row = 0; row < Constants.SIZE_OF_THE_GRID; row++)
         {
+            if (grid[row, 0] == Constants.DASH_SYMBOL)
+            {
+                continue;
+            }
+            
             for (int column = 0; column < Constants.SIZE_OF_THE_GRID; column++)
             {
                 if (grid[row, 0] != grid[row, column])
-                {
-                    if (grid[row, column] == Constants.DASH_SYMBOL)
-                    {
-                        return false;
-                    }
+                { 
+                    return false;
                 }
             }
         }
+        
         return match;
     }
 
@@ -69,15 +76,18 @@ public static class Logic
         {
             for (int column = 0; column < Constants.SIZE_OF_THE_GRID; column++)
             {
-                if (grid[0, column] != grid[row, column])
+                if (grid[0, column] == Constants.DASH_SYMBOL)
                 {
-                    if (grid[row, column] == Constants.DASH_SYMBOL)
-                    {
-                        return false;
-                    }
+                    continue;
+                }
+                
+                if (grid[0, column] != grid[row, column])
+                { 
+                    return false;
                 }
             }
         }
+        
         return match;
     }
     
@@ -87,14 +97,17 @@ public static class Logic
         
         for (int row = 0; row < Constants.SIZE_OF_THE_GRID; row++)
         {
-            if (grid[0, 0] != grid[row, row])
+            if (grid[0, 0] == Constants.DASH_SYMBOL)
             {
-                if (grid[row, row] == Constants.DASH_SYMBOL)
-                {
-                    return false;
-                }
+                continue;
+            }
+            
+            if (grid[0, 0] != grid[row, row])
+            { 
+                return false;
             }
         }
+        
         return match;
     }
     
@@ -104,14 +117,17 @@ public static class Logic
         
         for (int row = 0; row < Constants.SIZE_OF_THE_GRID; row++)
         {
-            if (grid[0, Constants.SIZE_OF_THE_GRID - 1] != grid[row, Constants.SIZE_OF_THE_GRID - row - 1])
+            if (grid[0, 2] == Constants.DASH_SYMBOL)
             {
-                if (grid[row, row] == Constants.DASH_SYMBOL)
-                {
-                    return false;
-                }
+                continue;
+            }
+            
+            if (grid[0, Constants.SIZE_OF_THE_GRID - 1] != grid[row, Constants.SIZE_OF_THE_GRID - row - 1])
+            { 
+                return false;
             }
         }
+        
         return match;
     }
     

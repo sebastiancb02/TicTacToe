@@ -6,7 +6,7 @@ class Program
     {
         char[,] grid = new char [Constants.SIZE_OF_THE_GRID, Constants.SIZE_OF_THE_GRID];
 
-        Logic.InitializeGrid(grid);
+        grid = Logic.InitializeGrid(grid);
         
         UI.DisplayGameIntro();
 
@@ -17,7 +17,8 @@ class Program
         {
             int row = UI.ValidateUserInput(UI.GetRowNumberFromUser()); 
             int column = UI.ValidateUserInput(UI.GetColumnNumberFromUser());
-
+            //grid[0, 0] = 'X';
+            
             bool available = Logic.CheckSlotAvailability(grid, row, column);
             
             if (!available)
@@ -26,9 +27,9 @@ class Program
                 continue;
             } 
             
-            Logic.PopulateGridWithUserSymbol(grid, row, column);
+            grid = Logic.PopulateGridWithUserSymbol(grid, row, column);
             
-            Logic.PopulateGridWithMachineSymbol(grid);
+            grid = Logic.PopulateGridWithMachineSymbol(grid);
             
             Logic.CheckSlotAvailability(grid, row, column);
             
