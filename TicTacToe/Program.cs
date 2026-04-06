@@ -17,7 +17,9 @@ class Program
         {
             int row = UI.ValidateUserInput(UI.GetRowNumberFromUser()); 
             int column = UI.ValidateUserInput(UI.GetColumnNumberFromUser());
-            //grid[0, 0] = 'X';
+            grid[0, 0] = 'X';
+            grid[0, 1] = 'X';
+            grid[0, 2] = 'X';
             
             bool available = Logic.CheckSlotAvailability(grid, row, column);
             

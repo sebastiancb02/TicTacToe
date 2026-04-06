@@ -41,14 +41,18 @@ public static class Logic
         int row = rnd.Next(0,3);
         int column = rnd.Next(0,3);
         
+        while (!CheckSlotAvailability(grid, row, column))
+        {
+            row = rnd.Next(0,3);
+            column = rnd.Next(0,3);    
+        }
+        
         grid [row,column] = Constants.SYMBOL_USED_BY_MACHINE;
         return grid;
     }
 
     public static bool CheckTheHorizontalLinesInTheGrid(char[,] grid)
     {
-        bool match = true;
-        
         for (int row = 0; row < Constants.SIZE_OF_THE_GRID; row++)
         {
             if (grid[row, 0] == Constants.DASH_SYMBOL)
@@ -56,24 +60,24 @@ public static class Logic
                 continue;
             }
             
+            bool match = true;
             for (int column = 0; column < Constants.SIZE_OF_THE_GRID; column++)
             {
                 if (grid[row, 0] != grid[row, column])
                 { 
-                    return false;
+                    match = false;
                 }
             }
         }
         
-        return match;
+        return false;
     }
-
+    /*
     public static bool CheckTheVerticalLinesInTheGrid(char[,] grid)
     {
-        bool match = true;
-        
         for (int row = 0; row < Constants.SIZE_OF_THE_GRID; row++)
         {
+            bool match = true;
             for (int column = 0; column < Constants.SIZE_OF_THE_GRID; column++)
             {
                 if (grid[0, column] == Constants.DASH_SYMBOL)
@@ -83,12 +87,12 @@ public static class Logic
                 
                 if (grid[0, column] != grid[row, column])
                 { 
-                    return false;
+                    match = false;
                 }
             }
         }
         
-        return match;
+        return false;
     }
     
     public static bool CheckTheFirstDiagonalLineInTheGrid(char[,] grid)
@@ -130,10 +134,12 @@ public static class Logic
         
         return match;
     }
+    */
     
     public static bool CheckIfWin(char[,] grid)
     {
-        return Logic.CheckTheHorizontalLinesInTheGrid(grid) || Logic.CheckTheVerticalLinesInTheGrid(grid) || Logic.CheckTheFirstDiagonalLineInTheGrid(grid) || Logic.CheckTheSecondDiagonalLineInTheGrid(grid); 
+        return
+            Logic.CheckTheHorizontalLinesInTheGrid(grid); //|| Logic.CheckTheVerticalLinesInTheGrid(grid) || Logic.CheckTheFirstDiagonalLineInTheGrid(grid) || Logic.CheckTheSecondDiagonalLineInTheGrid(grid); 
     }
     
     public static char CheckWhoTheWinnerOfTheGameIs(char[,] grid, int row, int column)
