@@ -68,16 +68,22 @@ public static class Logic
                     match = false;
                 }
             }
+
+            if (match)
+            {
+                return true;
+            }
         }
         
         return false;
     }
-    /*
+    
     public static bool CheckTheVerticalLinesInTheGrid(char[,] grid)
     {
         for (int row = 0; row < Constants.SIZE_OF_THE_GRID; row++)
         {
             bool match = true;
+            
             for (int column = 0; column < Constants.SIZE_OF_THE_GRID; column++)
             {
                 if (grid[0, column] == Constants.DASH_SYMBOL)
@@ -89,6 +95,11 @@ public static class Logic
                 { 
                     match = false;
                 }
+            }
+            
+            if (match)
+            {
+                return true;
             }
         }
         
@@ -134,12 +145,11 @@ public static class Logic
         
         return match;
     }
-    */
     
     public static bool CheckIfWin(char[,] grid)
     {
         return
-            Logic.CheckTheHorizontalLinesInTheGrid(grid); //|| Logic.CheckTheVerticalLinesInTheGrid(grid) || Logic.CheckTheFirstDiagonalLineInTheGrid(grid) || Logic.CheckTheSecondDiagonalLineInTheGrid(grid); 
+            Logic.CheckTheHorizontalLinesInTheGrid(grid) || Logic.CheckTheVerticalLinesInTheGrid(grid) || Logic.CheckTheFirstDiagonalLineInTheGrid(grid) || Logic.CheckTheSecondDiagonalLineInTheGrid(grid); 
     }
     
     public static char CheckWhoTheWinnerOfTheGameIs(char[,] grid, int row, int column)

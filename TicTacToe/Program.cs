@@ -17,9 +17,6 @@ class Program
         {
             int row = UI.ValidateUserInput(UI.GetRowNumberFromUser()); 
             int column = UI.ValidateUserInput(UI.GetColumnNumberFromUser());
-            grid[0, 0] = 'X';
-            grid[0, 1] = 'X';
-            grid[0, 2] = 'X';
             
             bool available = Logic.CheckSlotAvailability(grid, row, column);
             
@@ -43,15 +40,15 @@ class Program
             
                 if (winningSymbol == Constants.SYMBOL_USED_BY_USER)
                 {
-                    UI.ShowWinnerMessage();
                     UI.PrintGrid(grid);
+                    UI.ShowWinnerMessage();
                     break;
                 }
             
                 if (winningSymbol == Constants.SYMBOL_USED_BY_MACHINE)
                 {
-                    UI.ShowLoserMessage();
                     UI.PrintGrid(grid);
+                    UI.ShowLoserMessage();
                     break;
                 }    
             }
@@ -62,6 +59,7 @@ class Program
 
                 if (draw)
                 {
+                    UI.PrintGrid(grid);
                     UI.ShowDrawMessage();
                     break;
                 }
