@@ -17,6 +17,7 @@ class Program
         {
             int row = UI.ValidateUserInput(UI.GetRowNumberFromUser()); 
             int column = UI.ValidateUserInput(UI.GetColumnNumberFromUser());
+            Console.Clear();
             
             bool available = Logic.CheckSlotAvailability(grid, row, column);
             
@@ -28,41 +29,34 @@ class Program
             
             grid = Logic.PopulateGridWithUserSymbol(grid, row, column);
             
-            grid = Logic.PopulateGridWithMachineSymbol(grid);
-            
             Logic.CheckSlotAvailability(grid, row, column);
+
+            match = Logic.CheckIfWin(grid);
+
+            if (match)
+            {
+                UI.PrintGrid(grid);
+                UI.ShowWinnerMessage();
+                break;    
+            }
+            
+            grid = Logic.PopulateGridWithMachineSymbol(grid);
             
             match = Logic.CheckIfWin(grid);
 
             if (match)
             {
-                char winningSymbol = Logic.CheckWhoTheWinnerOfTheGameIs(grid, row, column);
-            
-                if (winningSymbol == Constants.SYMBOL_USED_BY_USER)
-                {
-                    UI.PrintGrid(grid);
-                    UI.ShowWinnerMessage();
-                    break;
-                }
-            
-                if (winningSymbol == Constants.SYMBOL_USED_BY_MACHINE)
-                {
-                    UI.PrintGrid(grid);
-                    UI.ShowLoserMessage();
-                    break;
-                }    
+                UI.PrintGrid(grid);
+                UI.ShowLoserMessage();
+                break;
             }
-
-            else
+            
+            bool draw =  Logic.CheckIfDraw(grid);
+            if (draw)
             {
-                bool draw =  Logic.CheckIfDraw(grid);
-
-                if (draw)
-                {
-                    UI.PrintGrid(grid);
-                    UI.ShowDrawMessage();
-                    break;
-                }
+                UI.PrintGrid(grid);
+                UI.ShowDrawMessage();
+                break;
             }
             
             UI.PrintGrid(grid);

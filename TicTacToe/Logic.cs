@@ -80,16 +80,17 @@ public static class Logic
     
     public static bool CheckTheVerticalLinesInTheGrid(char[,] grid)
     {
-        for (int row = 0; row < Constants.SIZE_OF_THE_GRID; row++)
+        for (int column = 0; column < Constants.SIZE_OF_THE_GRID; column++)
         {
+            if (grid[0, column] == Constants.DASH_SYMBOL)
+            {
+                continue;
+            }
+            
             bool match = true;
             
-            for (int column = 0; column < Constants.SIZE_OF_THE_GRID; column++)
+            for (int row = 1; row < Constants.SIZE_OF_THE_GRID; row++)
             {
-                if (grid[0, column] == Constants.DASH_SYMBOL)
-                {
-                    continue;
-                }
                 
                 if (grid[0, column] != grid[row, column])
                 { 
@@ -108,80 +109,43 @@ public static class Logic
     
     public static bool CheckTheFirstDiagonalLineInTheGrid(char[,] grid)
     {
-        bool match = true;
-        
-        for (int row = 0; row < Constants.SIZE_OF_THE_GRID; row++)
+        if (grid[0, 0] == Constants.DASH_SYMBOL)
         {
-            if (grid[0, 0] == Constants.DASH_SYMBOL)
-            {
-                continue;
-            }
-            
+            return false;
+        }
+        
+        for (int row = 1; row < Constants.SIZE_OF_THE_GRID; row++)
+        {
             if (grid[0, 0] != grid[row, row])
             { 
                 return false;
             }
         }
         
-        return match;
+        return true;
     }
     
     public static bool CheckTheSecondDiagonalLineInTheGrid(char[,] grid)
     {
-        bool match = true;
-        
-        for (int row = 0; row < Constants.SIZE_OF_THE_GRID; row++)
+        if (grid[0, 2] == Constants.DASH_SYMBOL)
         {
-            if (grid[0, 2] == Constants.DASH_SYMBOL)
-            {
-                continue;
-            }
-            
+            return false;
+        }
+        
+        for (int row = 1; row < Constants.SIZE_OF_THE_GRID; row++)
+        {
             if (grid[0, Constants.SIZE_OF_THE_GRID - 1] != grid[row, Constants.SIZE_OF_THE_GRID - row - 1])
             { 
                 return false;
             }
         }
         
-        return match;
+        return true;
     }
     
     public static bool CheckIfWin(char[,] grid)
     {
-        return
-            Logic.CheckTheHorizontalLinesInTheGrid(grid) || Logic.CheckTheVerticalLinesInTheGrid(grid) || Logic.CheckTheFirstDiagonalLineInTheGrid(grid) || Logic.CheckTheSecondDiagonalLineInTheGrid(grid); 
-    }
-    
-    public static char CheckWhoTheWinnerOfTheGameIs(char[,] grid, int row, int column)
-    {
-        if (CheckIfWin(grid))
-        {
-            //Horizontal lines 👇
-            if (grid[row, 0] == grid[row, column])
-            {
-                return grid[row, 0];
-            }
-        
-            //Vertical Lines 👇
-            if (grid[0, column] == grid[row, column])
-            {
-                return grid[0, column];
-            }
-        
-            //First diagonal line 👇
-            if (grid[0, 0] != grid[row, row])
-            {
-                return grid[0, 0];
-            }
-        
-            //Second diagonal line 👇
-            if (grid[0, Constants.SIZE_OF_THE_GRID - 1] != grid[row, Constants.SIZE_OF_THE_GRID - row - 1])
-            {
-                return grid[0, Constants.SIZE_OF_THE_GRID - 1];
-            }
-        }
-        
-        return 'y';
+        return Logic.CheckTheHorizontalLinesInTheGrid(grid) || Logic.CheckTheVerticalLinesInTheGrid(grid) || Logic.CheckTheFirstDiagonalLineInTheGrid(grid) || Logic.CheckTheSecondDiagonalLineInTheGrid(grid); 
     }
     
     public static bool CheckIfDraw (char[,] grid)
