@@ -6,7 +6,7 @@ class Program
     {
         char[,] grid = new char [Constants.SIZE_OF_THE_GRID, Constants.SIZE_OF_THE_GRID];
 
-        grid = Logic.InitializeGrid(grid);
+        grid = Logic.InitializeGrid(grid); 
         
         UI.DisplayGameIntro();
 
@@ -40,6 +40,14 @@ class Program
                 break;    
             }
             
+            bool draw =  Logic.CheckIfDraw(grid);
+            if (draw)
+            {
+                UI.PrintGrid(grid);
+                UI.ShowDrawMessage();
+                break;
+            }
+            
             grid = Logic.PopulateGridWithMachineSymbol(grid);
             
             match = Logic.CheckIfWin(grid);
@@ -51,7 +59,7 @@ class Program
                 break;
             }
             
-            bool draw =  Logic.CheckIfDraw(grid);
+            draw =  Logic.CheckIfDraw(grid);
             if (draw)
             {
                 UI.PrintGrid(grid);

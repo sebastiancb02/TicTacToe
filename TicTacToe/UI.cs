@@ -46,12 +46,14 @@ public static class UI
             if (!valid)
             {
                 Console.WriteLine("\nInvalid Input"); 
+                input = Console.ReadKey(true).KeyChar;
                 continue;
             }
 
             if (userInput < 0 || userInput > 2) 
             {
                 Console.WriteLine("\nPlease, make sure to choose a number between 0-2"); 
+                input = Console.ReadKey(true).KeyChar;
                 continue;
             }
             
